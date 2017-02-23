@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Youchao&#39;s Programming Cafe</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://xueyouchao.github.io/"/>
+  <updated>2017-02-23T08:00:40.998Z</updated>
+  <id>https://xueyouchao.github.io/</id>
+  
+  <author>
+    <name>Youchao Xue</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Journey of Emacs</title>
+    <link href="https://xueyouchao.github.io/2017/02/22/Journey-of-Emacs/"/>
+    <id>https://xueyouchao.github.io/2017/02/22/Journey-of-Emacs/</id>
+    <published>2017-02-22T05:12:21.000Z</published>
+    <updated>2017-02-23T08:00:40.998Z</updated>
+    
+    <content type="html"><![CDATA[<p>I have switched my programming environment to Manjaro Linux recently. So I started to give a try on legendary editor Emacs for development. I started with zero basics for Emacs and spent only 2 week’s spare time to get used to writing code and blog with it.</p>
+<h2 id="standing-on-the-shoulders-of-giants">Standing on the Shoulders of Giants</h2>
+<ul>
+<li>Do not blindly start to learn Emacs commands or lisp language, learning without helping you to achieve your goal will make you give up soon. You should start from guru’s setup to achieve what you want to do and learn the commands and everyting along the way.</li>
+<li>I started by taking advice from Chen Bin <a href="https://github.com/redguardtoo" target="_blank" rel="external">redguardtoo</a>. Quickly read his post <a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide" target="_blank" rel="external">“mastering-emacs-in-one-year-guide”</a>.</li>
+<li>Followed the recommendation, I spent a little time going through the emacs tutorial. ThenI downloaded his <a href="https://github.com/redguardtoo/emacs.d" target="_blank" rel="external">configuration</a> to play around.</li>
+<li>Very importantly, write down the important steps. Emacs has powerful plugin management functionality, when you made so many customizations to emacs you want to make sure to write down the steps.</li>
+</ul>
+<h2 id="explore-the-world-of-emacs">Explore the World of Emacs</h2>
+<ul>
+<li>So many good things guru’s has setup for you. Try it.<br>
+</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Spent half an hour to learn basics of Org Mode and play with M-Org-Indent-Mode in Chen’s setup. You can write down the steps using org-indent-mode as I did. <img src="/images/org-mode.png"><br>
+</li>
+<li>Configure neotree and install all-the-icons package for it</li>
+<li>Configure c++ packages for development</li>
+<li>Use Git version control in emacs with magit</li>
+<li>Write blog in Markdown mode which is pretty much I am doing now. …</li>
+</ol>
+<h2 id="two-configurations-i-recommended">Two Configurations I Recommended</h2>
+<ol style="list-style-type: decimal">
+<li><p>Chen Bin’s setup <a href="%22https://github.com/redguardtoo%22">(git:redguardtoo)</a><br>
+It comes with pretty much everything I need and a very clear structure inherit from Steve Purcell. The theme is very beautiful and the font colors are very comfortable for me to write programming code. Note that Chen carefully pick the stable version of ELPA packages and you need to add unstaple exceptions in his configuration file to see the package in package installation list.</p></li>
+<li><p><a href="http://spacemacs.org/" target="_blank" rel="external">Spacemacs</a><br>
+Spacemacs has very good documentation explaining its structure. The package management module of Spacemacs utilizes the packages as building blocks and assemble them into layers. You can customize your layers with all these building blocks. Be sure to checkout the awesome <a href="https://github.com/sellout/emacs-color-theme-solarized" target="_blank" rel="external">emacs port for solarized theme</a>. A screenshot of my spacemacs workspace shows this beautiful theme. <img src="/images/solarized-dark.png"> <img src="/images/solarized-light.png"></p></li>
+<li><p>I prefer Chen’s setting. I felt it’s faster than Spacemacs and still easy for me to plugin anything else in due to the clear structure.</p></li>
+</ol>
+<h2 id="some-configuration-steps-i-went-through">Some Configuration Steps I Went Through</h2>
+<p><a href="https://github.com/xueyouchao/todo/blob/master/EmacsToDo.org" target="_blank" rel="external">In Org Mode, best read in emacs org-indent-mode</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I have switched my programming environment to Manjaro Linux recently. So I started to give a try on legendary editor Emacs for developmen
+    
+    </summary>
+    
+    
+      <category term="Emacs" scheme="https://xueyouchao.github.io/tags/Emacs/"/>
+    
+      <category term="Markdown" scheme="https://xueyouchao.github.io/tags/Markdown/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Compile Time String Hashing</title>
+    <link href="https://xueyouchao.github.io/2016/11/16/CompileTimeString/"/>
+    <id>https://xueyouchao.github.io/2016/11/16/CompileTimeString/</id>
+    <published>2016-11-16T05:12:21.000Z</published>
+    <updated>2017-02-22T06:04:23.489Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="why-do-we-need-it">why do we need it</h2>
+<p>String comparison is a relatively slow operation and some times not tolerable. Especially when you have many if..else.. (or switch/case) code like this:<br>
+if (mode == “StateA”) {<br>
+…<br>
+}<br>
+else if (mode == “StateB”) {<br>
+…<br>
+}</p>
+<p>The first thought come in mind is to use hash function to speed up the comparison operation; so we can improve the time complexity from O(<span class="math inline">\(n^2\)</span>) to O(1). How can we do better? Make the hash calculation on compile time so it saves some extra run-time cost for constant string hash calculation and let the compiler do the job for you.</p>
+<h2 id="c98-solutions">c++98 solutions</h2>
+<p>Before c++11, c++98 solutions are not perfect. Such as:</p>
+<ul>
+<li><a href="http://www.gamasutra.com/view/news/127915/InDepth_Quasi_CompileTime_String_Hashing.php" target="_blank" rel="external">quasi compile time string hashing</a><br>
+Cons: This solution does not work for “switch/case” statements.<br>
+</li>
+<li><a href="http://arcticinteractive.com/2009/04/18/compile-time-string-hashing-boost-mpl/" target="_blank" rel="external">using Boost.MPL</a><br>
+Cons: This solution needs to separate strings into groups.</li>
+</ul>
+<h2 id="c11c14-solutions">c++11/c++14 solutions</h2>
+<p>In c++11/c++14, constexpr provides us a new way to the perfect solution for compile time string hashing. However different c++ compilers support the new standard differently and we still need to make sure the code is fully tested on multiple compilers.</p>
+<p>So first let’s first pick up an easy Hash function to start. The trick is to utilize the c++11</p>
+<ul>
+<li>template/macro (two ways for compile time processing)</li>
+<li>constexpr syntax</li>
+</ul>
+<p>to pre-calculate the hash value and sometimes with the help of template recursion in compile time.</p>
+<h4 id="example-a">Example A</h4>
+<p>Java string’s hashCode() is one of the simplest hash function which uses <a href="https://en.wikipedia.org/wiki/Horner&#39;s_method" target="_blank" rel="external">Horner’s method</a>: <span class="math display">\[h = s[0] * 31^\left(n-1\right)+s[1] * 31^\left(n-2\right) + ... + s[n-1]\]</span></p>
+<p>It’s not hard to deduce the following iterative equation:</p>
+<p><span class="math display">\[h = h * 31 + s[n-1]\]</span></p>
+<p>Based on this recusive nature you can write a simple recursive c++ function:</p>
+<pre><code>template &lt;size_t N&gt;
+constexpr inline size_t HORNER_HASH(size_t prime, const char (&amp;str)[N], size_t Len = N-1)
+{
+    return (Len &lt;= 1) ? str[0] : (prime * HORNER_HASH(prime, str, Len-1) + str[Len-1]);
+}
+#define CompileTimeHash1(x) (HORNER_HASH(31, x))
+</code></pre>
+<p>If you are not familiar with syntax <code>const char (&amp;str)[N]</code> Stefan Reinalter gave an explanation <a href="https://blog.molecular-matters.com/2011/06/22/subtle-differences-in-c/" target="_blank" rel="external">here</a>.</p>
+<p>Note <code>N</code> is deduced to be <code>sizeof(str)</code> which including the null terminator for c string so we have to pass <code>N-1</code> as the length of c string.</p>
+<p>The following testing code validates if the runtime hash function generates the same result as the compile time hash function both in <code>if</code> and <code>switch</code> statements.</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+template &lt;size_t N&gt;
+constexpr inline size_t HORNER_HASH(size_t prime, const char (&amp;str)[N], size_t Len = N-1)
+{
+    return (Len &lt;= 1) ? str[0] : (prime * HORNER_HASH(prime, str, Len-1) + str[Len-1]);
+}
+
+#define COMPILE_HORNER_HASH(x) (HORNER_HASH(31, x))
+
+size_t RUNTIME_HORNER_HASH(size_t prime, char const* str)
+{
+    if (str == NULL) return 0;
+    size_t hash = *str;
+    for (; *(str+1)!=0; str++)
+    {
+      hash = prime * hash + *(str+1);
+    }
+    return hash;
+}
+
+int main()
+{
+    const char* currentState = &quot;StateA&quot;;
+    if (RUNTIME_HORNER_HASH(31,currentState) == COMPILE_HORNER_HASH(&quot;StateA&quot;))
+        printf(&quot;if statement test success!\n&quot;);
+    switch (RUNTIME_HORNER_HASH(31,currentState))
+    {
+        case COMPILE_HORNER_HASH(&quot;StateA&quot;):
+        printf(&quot;switch statement test success!\n&quot;);
+        break;
+    }
+    return 1;
+}
+</code></pre>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;why-do-we-need-it&quot;&gt;why do we need it&lt;/h2&gt;
+&lt;p&gt;String comparison is a relatively slow operation and some times not tolerable. Especial
+    
+    </summary>
+    
+    
+      <category term="C++11" scheme="https://xueyouchao.github.io/tags/C-11/"/>
+    
+      <category term="c++14" scheme="https://xueyouchao.github.io/tags/c-14/"/>
+    
+      <category term="Hashing" scheme="https://xueyouchao.github.io/tags/Hashing/"/>
+    
+  </entry>
+  
+</feed>
