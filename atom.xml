@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xueyouchao.github.io/"/>
-  <updated>2017-02-24T01:28:17.182Z</updated>
+  <updated>2017-02-24T05:17:32.076Z</updated>
   <id>https://xueyouchao.github.io/</id>
   
   <author>
@@ -17,26 +17,26 @@
   
   <entry>
     <title>Lock Free Ring Queue for Multi-producer and Multi-consumer</title>
-    <link href="https://xueyouchao.github.io/2017/02/23/Lock-Free-Ring-Queue-for-Multi-producer-and-Multi-consumer/"/>
-    <id>https://xueyouchao.github.io/2017/02/23/Lock-Free-Ring-Queue-for-Multi-producer-and-Multi-consumer/</id>
-    <published>2017-02-24T01:28:17.182Z</published>
-    <updated>2017-02-24T01:28:17.182Z</updated>
+    <link href="https://xueyouchao.github.io/2017/02/24/Lock-Free-Ring-Queue-for-Multi-producer-and-Multi-consumer/"/>
+    <id>https://xueyouchao.github.io/2017/02/24/Lock-Free-Ring-Queue-for-Multi-producer-and-Multi-consumer/</id>
+    <published>2017-02-24T05:17:32.076Z</published>
+    <updated>2017-02-24T05:17:32.076Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="lock-free-ring-queue---what-is-it">Lock-free Ring Queue - What is it?</h2>
-<p>In a nutshell: it is a inter-thread messaging data structure.</p>
+    <content type="html"><![CDATA[<p>Lock-free Ring Queue - What is it? In a nutshell: it is a data structure facilitating inter-thread messaging communication.</p>
 <h2 id="a-little-history">A little history</h2>
 <ul>
 <li><p>Lock-free ring queue datastructure attracted a lot of attention in the concurrency world because of the name LMAX Disruptor in <a href="http://www.oracle.com/us/corporate/press/512656" target="_blank" rel="external">2011</a>. You can still find the presentation back on Dec 2010 <a href="https://www.infoq.com/presentations/LMAX" target="_blank" rel="external">here</a>. Never heared of Disruptor? Spring framework uses it undernearth since <a href="https://spring.io/blog/2013/11/12/it-can-t-just-be-big-data-it-has-to-be-fast-data-reactor-1-0-goes-ga" target="_blank" rel="external">2013</a>.</p></li>
-<li><p>The lock-free ring queue was sit at the core of Disruptor.</p></li>
-<li><p>The same data structure was in BSD code back in <a href="https://svnweb.freebsd.org/base/head/sys/sys/buf_ring.h?view=markup&amp;pathrev=185162" target="_blank" rel="external">2008</a>.</p></li>
-<li><p>The same data structure is used in <a href="http://lxr.free-electrons.com/source/include/linux/kfifo.h" target="_blank" rel="external">linux kernel</a>.</p></li>
+<li>The lock-free ring queue was sit at the core of Disruptor.<br>
+</li>
+<li>The same data structure was in BSD code back in <a href="https://svnweb.freebsd.org/base/head/sys/sys/buf_ring.h?view=markup&amp;pathrev=185162" target="_blank" rel="external">2008</a>.<br>
+</li>
+<li>The same data structure is used in <a href="http://lxr.free-electrons.com/source/include/linux/kfifo.h" target="_blank" rel="external">linux kernel</a>.<br>
+</li>
 <li><p>Also in famous intel <a href="http://dpdk.org/browse/dpdk/tree/lib/librte_ring/rte_ring.h" target="_blank" rel="external">DPDK framework</a>.</p></li>
 </ul>
 <h2 id="why-redo-the-wheel-in-c11">Why redo the wheel in C++11 ?</h2>
 <p>You might ask there are so many implementations available now, why do we redo it in c++11?</p>
-<ul>
-<li>One of the biggest benefit C++11 brought to us IMHO is its multithreading memory model and atomics library. Imagine without these two how much work do you need to do to make sure your multi-threading code will run correctly on different OS and CPU architecture. In the multi-core hardware era c++11 brought us powerful weapons that enable both sequential consistency and weakly ordered multithreading models for our multithreading programming to squeeze our hardware’s true power. We have a good start then we can build up better world to compete with Java, Rust, Go, Clojure,Erlang, Haskell, Scala etc. in this concurrent world.</li>
-</ul>
+<p>One of the biggest benefit C++11 brought to us IMHO is its multithreading memory model and atomics library. Imagine without these two how much work do you need to do to make sure your multi-threading code will run correctly on different OS and CPU architecture. In the multi-core hardware era c++11 brought us powerful weapons that enable both sequential consistency and weakly ordered multithreading models for our multithreading programming to squeeze our hardware’s true power. We have a good start then we can build up better world to compete with Java, Rust, Go, Clojure,Erlang, Haskell, Scala etc. in this concurrent world.</p>
 <h2 id="talk-is-cheap-show-me-the-code">Talk is cheap, show me the code</h2>
 <p>Here I will present a deadly simple lock-free MPMC(multi-producer, multi-consumer) ring queue implementation in c++11. The C implementation can be found at dpdk <a href="http://dpdk.org/browse/dpdk/tree/lib/librte_ring" target="_blank" rel="external">git</a>. Ring queue’s documentation can be also found at dpdk <a href="http://dpdk.org/doc/guides/prog_guide/ring_lib.html" target="_blank" rel="external">site</a>.</p>
 <p>In my simplest version, I have only implemented push/pop so far for an easy start; no bulk operations, no watermark notification, no dynamic size adjustments for the buffer.<br>
@@ -75,8 +75,8 @@ private:
     
     <summary type="html">
     
-      &lt;h2 id=&quot;lock-free-ring-queue---what-is-it&quot;&gt;Lock-free Ring Queue - What is it?&lt;/h2&gt;
-&lt;p&gt;In a nutshell: it is a inter-thread messaging data str
+      &lt;p&gt;Lock-free Ring Queue - What is it? In a nutshell: it is a data structure facilitating inter-thread messaging communication.&lt;/p&gt;
+&lt;h2 id=&quot;a
     
     </summary>
     
@@ -98,7 +98,7 @@ private:
     <link href="https://xueyouchao.github.io/2017/02/22/Journey-of-Emacs/"/>
     <id>https://xueyouchao.github.io/2017/02/22/Journey-of-Emacs/</id>
     <published>2017-02-22T05:12:21.000Z</published>
-    <updated>2017-02-24T03:31:29.915Z</updated>
+    <updated>2017-02-24T05:08:08.771Z</updated>
     
     <content type="html"><![CDATA[<p>I have switched my programming environment to Manjaro Linux recently. So I started to give a try on legendary editor Emacs for development. I started with zero basics for Emacs and spent only 2 week’s spare time to get used to writing code and blog with it.</p>
 <h2 id="standing-on-the-shoulders-of-giants">Standing on the Shoulders of Giants</h2>
@@ -151,10 +151,9 @@ Spacemacs has very good documentation explaining its structure. The package mana
     <link href="https://xueyouchao.github.io/2016/11/16/CompileTimeString/"/>
     <id>https://xueyouchao.github.io/2016/11/16/CompileTimeString/</id>
     <published>2016-11-16T05:12:21.000Z</published>
-    <updated>2017-02-24T04:03:25.568Z</updated>
+    <updated>2017-02-24T05:08:49.447Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="why-do-we-need-it">why do we need it</h2>
-<p>String comparison is a relatively slow operation and some times not tolerable. Especially when you have many if..else.. (or switch/case) code like this:<br>
+    <content type="html"><![CDATA[<p>String comparison is a relatively slow operation and some times not tolerable. Especially when you have many if..else.. (or switch/case) code like this:<br>
 if (mode == “StateA”) {<br>
 …<br>
 }<br>
@@ -233,8 +232,7 @@ int main()
     
     <summary type="html">
     
-      &lt;h2 id=&quot;why-do-we-need-it&quot;&gt;why do we need it&lt;/h2&gt;
-&lt;p&gt;String comparison is a relatively slow operation and some times not tolerable. Especial
+      &lt;p&gt;String comparison is a relatively slow operation and some times not tolerable. Especially when you have many if..else.. (or switch/case) 
     
     </summary>
     
