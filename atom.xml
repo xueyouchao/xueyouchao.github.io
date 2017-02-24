@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xueyouchao.github.io/"/>
-  <updated>2017-02-24T04:03:25.671Z</updated>
+  <updated>2017-02-24T01:28:17.182Z</updated>
   <id>https://xueyouchao.github.io/</id>
   
   <author>
@@ -14,118 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="https://xueyouchao.github.io/2017/02/23/CompileTimeString/"/>
-    <id>https://xueyouchao.github.io/2017/02/23/CompileTimeString/</id>
-    <published>2017-02-24T04:03:25.681Z</published>
-    <updated>2017-02-24T04:03:25.671Z</updated>
-    
-    <content type="html"><![CDATA[<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-<title>CompileTimeString.html</title>
-
-</head>
-
-<body>
-
-<h2 id="why-do-we-need-it">why do we need it</h2>
-<p>String comparison is a relatively slow operation and some times not tolerable. Especially when you have many if..else.. (or switch/case) code like this:<br>
-if (mode == &quot;StateA&quot;) {<br>
-...<br>
-}<br>
-else if (mode == &quot;StateB&quot;) {<br>
-...<br>
-}</p>
-<p>The first thought come in mind is to use hash function to speed up the comparison operation; so we can improve the time complexity from O(<span class="math inline"><em>n</em><sup>2</sup></span>) to O(1). How can we do better? Make the hash calculation on compile time so it saves some extra run-time cost for constant string hash calculation and let the compiler do the job for you.</p>
-<h2 id="c98-solutions">c++98 solutions</h2>
-<p>Before c++11, c++98 solutions are not perfect. Such as:</p>
-<ul>
-<li><a href="http://www.gamasutra.com/view/news/127915/InDepth_Quasi_CompileTime_String_Hashing.php" target="_blank" rel="external">quasi compile time string hashing</a><br>
-Cons: This solution does not work for &quot;switch/case&quot; statements.<br>
-</li>
-<li><a href="http://arcticinteractive.com/2009/04/18/compile-time-string-hashing-boost-mpl/" target="_blank" rel="external">using Boost.MPL</a><br>
-Cons: This solution needs to separate strings into groups.</li>
-</ul>
-<h2 id="c11c14-solutions">c++11/c++14 solutions</h2>
-<p>In c++11/c++14, constexpr provides us a new way to the perfect solution for compile time string hashing. However different c++ compilers support the new standard differently and we still need to make sure the code is fully tested on multiple compilers.</p>
-<p>So first let's first pick up an easy Hash function to start. The trick is to utilize the c++11</p>
-<ul>
-<li>template/macro (two ways for compile time processing)</li>
-<li>constexpr syntax</li>
-</ul>
-<p>to pre-calculate the hash value and sometimes with the help of template recursion in compile time.</p>
-<h4 id="example-a">Example A</h4>
-<p>Java string's hashCode() is one of the simplest hash function which uses <a href="https://en.wikipedia.org/wiki/Horner&#39;s_method" target="_blank" rel="external">Horner's method</a>: <br><span class="math display"><em>h</em> = <em>s</em>[0]*31<sup>(<em>n</em>−1)</sup> + <em>s</em>[1]*31<sup>(<em>n</em>−2)</sup> + ... + <em>s</em>[<em>n</em> − 1]</span><br></p>
-<p>It's not hard to deduce the following iterative equation:</p>
-<p><br><span class="math display"><em>h</em> = <em>h</em> * 31 + <em>s</em>[<em>n</em> − 1]</span><br></p>
-<p>Based on this recusive nature you can write a simple recursive c++ function:</p>
-<pre><code>template &lt;size_t N&gt;
-constexpr inline size_t HORNER_HASH(size_t prime, const char (&amp;str)[N], size_t Len = N-1)
-{
-    return (Len &lt;= 1) ? str[0] : (prime * HORNER_HASH(prime, str, Len-1) + str[Len-1]);
-}
-#define CompileTimeHash1(x) (HORNER_HASH(31, x))
-</code></pre>
-<p>If you are not familiar with syntax <code>const char (&amp;str)[N]</code> Stefan Reinalter gave an explanation <a href="https://blog.molecular-matters.com/2011/06/22/subtle-differences-in-c/" target="_blank" rel="external">here</a>.</p>
-<p>Note <code>N</code> is deduced to be <code>sizeof(str)</code> which including the null terminator for c string so we have to pass <code>N-1</code> as the length of c string.</p>
-<p>The following testing code validates if the runtime hash function generates the same result as the compile time hash function both in <code>if</code> and <code>switch</code> statements.</p>
-<pre><code>#include &lt;stdio.h&gt;
-
-template &lt;size_t N&gt;
-constexpr inline size_t HORNER_HASH(size_t prime, const char (&amp;str)[N], size_t Len = N-1)
-{
-    return (Len &lt;= 1) ? str[0] : (prime * HORNER_HASH(prime, str, Len-1) + str[Len-1]);
-}
-
-#define COMPILE_HORNER_HASH(x) (HORNER_HASH(31, x))
-
-size_t RUNTIME_HORNER_HASH(size_t prime, char const* str)
-{
-    if (str == NULL) return 0;
-    size_t hash = *str;
-    for (; *(str+1)!=0; str++)
-    {
-      hash = prime * hash + *(str+1);
-    }
-    return hash;
-}
-
-int main()
-{
-    const char* currentState = &quot;StateA&quot;;
-    if (RUNTIME_HORNER_HASH(31,currentState) == COMPILE_HORNER_HASH(&quot;StateA&quot;))
-        printf(&quot;if statement test success!\n&quot;);
-    switch (RUNTIME_HORNER_HASH(31,currentState))
-    {
-        case COMPILE_HORNER_HASH(&quot;StateA&quot;):
-        printf(&quot;switch statement test success!\n&quot;);
-        break;
-    }
-    return 1;
-}
-</code></pre>
-
-</body>
-</html>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
-&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;
-	&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-st
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>Lock Free Ring Queue for Multi-producer and Multi-consumer</title>
