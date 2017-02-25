@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xueyouchao.github.io/"/>
-  <updated>2017-02-24T05:17:32.076Z</updated>
+  <updated>2017-02-24T05:21:18.759Z</updated>
   <id>https://xueyouchao.github.io/</id>
   
   <author>
@@ -19,11 +19,11 @@
     <title>Lock Free Ring Queue for Multi-producer and Multi-consumer</title>
     <link href="https://xueyouchao.github.io/2017/02/24/Lock-Free-Ring-Queue-for-Multi-producer-and-Multi-consumer/"/>
     <id>https://xueyouchao.github.io/2017/02/24/Lock-Free-Ring-Queue-for-Multi-producer-and-Multi-consumer/</id>
-    <published>2017-02-24T05:17:32.076Z</published>
-    <updated>2017-02-24T05:17:32.076Z</updated>
+    <published>2017-02-24T05:21:18.759Z</published>
+    <updated>2017-02-24T05:21:18.759Z</updated>
     
     <content type="html"><![CDATA[<p>Lock-free Ring Queue - What is it? In a nutshell: it is a data structure facilitating inter-thread messaging communication.</p>
-<h2 id="a-little-history">A little history</h2>
+<h3 id="a-little-history">A little history</h3>
 <ul>
 <li><p>Lock-free ring queue datastructure attracted a lot of attention in the concurrency world because of the name LMAX Disruptor in <a href="http://www.oracle.com/us/corporate/press/512656" target="_blank" rel="external">2011</a>. You can still find the presentation back on Dec 2010 <a href="https://www.infoq.com/presentations/LMAX" target="_blank" rel="external">here</a>. Never heared of Disruptor? Spring framework uses it undernearth since <a href="https://spring.io/blog/2013/11/12/it-can-t-just-be-big-data-it-has-to-be-fast-data-reactor-1-0-goes-ga" target="_blank" rel="external">2013</a>.</p></li>
 <li>The lock-free ring queue was sit at the core of Disruptor.<br>
@@ -34,13 +34,13 @@
 </li>
 <li><p>Also in famous intel <a href="http://dpdk.org/browse/dpdk/tree/lib/librte_ring/rte_ring.h" target="_blank" rel="external">DPDK framework</a>.</p></li>
 </ul>
-<h2 id="why-redo-the-wheel-in-c11">Why redo the wheel in C++11 ?</h2>
+<h3 id="why-redo-the-wheel-in-c11">Why redo the wheel in C++11 ?</h3>
 <p>You might ask there are so many implementations available now, why do we redo it in c++11?</p>
 <p>One of the biggest benefit C++11 brought to us IMHO is its multithreading memory model and atomics library. Imagine without these two how much work do you need to do to make sure your multi-threading code will run correctly on different OS and CPU architecture. In the multi-core hardware era c++11 brought us powerful weapons that enable both sequential consistency and weakly ordered multithreading models for our multithreading programming to squeeze our hardware’s true power. We have a good start then we can build up better world to compete with Java, Rust, Go, Clojure,Erlang, Haskell, Scala etc. in this concurrent world.</p>
-<h2 id="talk-is-cheap-show-me-the-code">Talk is cheap, show me the code</h2>
+<h3 id="talk-is-cheap-show-me-the-code">Talk is cheap, show me the code</h3>
 <p>Here I will present a deadly simple lock-free MPMC(multi-producer, multi-consumer) ring queue implementation in c++11. The C implementation can be found at dpdk <a href="http://dpdk.org/browse/dpdk/tree/lib/librte_ring" target="_blank" rel="external">git</a>. Ring queue’s documentation can be also found at dpdk <a href="http://dpdk.org/doc/guides/prog_guide/ring_lib.html" target="_blank" rel="external">site</a>.</p>
 <p>In my simplest version, I have only implemented push/pop so far for an easy start; no bulk operations, no watermark notification, no dynamic size adjustments for the buffer.<br>
-## Class Memebers First let’s look at ring queue class members:</p>
+### Class Memebers First let’s look at ring queue class members:</p>
 <pre><code>constexpr uint64_t RING_BUFFER_SIZE = 2 &lt;&lt; 10;
 constexpr uint64_t CACHE_LINE_SIZE = 64;
 
@@ -76,7 +76,7 @@ private:
     <summary type="html">
     
       &lt;p&gt;Lock-free Ring Queue - What is it? In a nutshell: it is a data structure facilitating inter-thread messaging communication.&lt;/p&gt;
-&lt;h2 id=&quot;a
+&lt;h3 id=&quot;a
     
     </summary>
     
@@ -98,17 +98,17 @@ private:
     <link href="https://xueyouchao.github.io/2017/02/22/Journey-of-Emacs/"/>
     <id>https://xueyouchao.github.io/2017/02/22/Journey-of-Emacs/</id>
     <published>2017-02-22T05:12:21.000Z</published>
-    <updated>2017-02-24T05:08:08.771Z</updated>
+    <updated>2017-02-24T05:22:45.701Z</updated>
     
     <content type="html"><![CDATA[<p>I have switched my programming environment to Manjaro Linux recently. So I started to give a try on legendary editor Emacs for development. I started with zero basics for Emacs and spent only 2 week’s spare time to get used to writing code and blog with it.</p>
-<h2 id="standing-on-the-shoulders-of-giants">Standing on the Shoulders of Giants</h2>
+<h3 id="standing-on-the-shoulders-of-giants">Standing on the Shoulders of Giants</h3>
 <ul>
 <li>Do not blindly start to learn Emacs commands or lisp language, learning without helping you to achieve your goal will make you give up soon. You should start from guru’s setup to achieve what you want to do and learn the commands and everyting along the way.</li>
 <li>I started by taking advice from Chen Bin <a href="https://github.com/redguardtoo" target="_blank" rel="external">redguardtoo</a>. Quickly read his post <a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide" target="_blank" rel="external">“mastering-emacs-in-one-year-guide”</a>.</li>
 <li>Followed the recommendation, I spent a little time going through the emacs tutorial. ThenI downloaded his <a href="https://github.com/redguardtoo/emacs.d" target="_blank" rel="external">configuration</a> to play around.</li>
 <li>Very importantly, write down the important steps. Emacs has powerful plugin management functionality, when you made so many customizations to emacs you want to make sure to write down the steps.</li>
 </ul>
-<h2 id="explore-the-world-of-emacs">Explore the World of Emacs</h2>
+<h3 id="explore-the-world-of-emacs">Explore the World of Emacs</h3>
 <ul>
 <li>So many good things guru’s has setup for you. Try it.<br>
 </li>
@@ -121,7 +121,7 @@ private:
 <li>Use Git version control in emacs with magit</li>
 <li>Write blog in Markdown mode which is pretty much I am doing now. …</li>
 </ol>
-<h2 id="two-configurations-i-recommended">Two Configurations I Recommended</h2>
+<h3 id="two-configurations-i-recommended">Two Configurations I Recommended</h3>
 <ol style="list-style-type: decimal">
 <li><p>Chen Bin’s setup <a href="%22https://github.com/redguardtoo%22">redguardtoo</a><br>
 It comes with pretty much everything I need and a very clear structure inherit from Steve Purcell. The theme is very beautiful and the font colors are very comfortable for me to write programming code. Note that Chen carefully pick the stable version of ELPA packages and you need to add unstaple exceptions in his configuration file to see the package in package installation list.</p></li>
@@ -129,7 +129,7 @@ It comes with pretty much everything I need and a very clear structure inherit f
 Spacemacs has very good documentation explaining its structure. The package management module of Spacemacs utilizes the packages as building blocks and assemble them into layers. You can customize your layers with all these building blocks. Be sure to checkout the awesome <a href="https://github.com/sellout/emacs-color-theme-solarized" target="_blank" rel="external">emacs port for solarized theme</a>. A screenshot of my spacemacs workspace shows this beautiful theme. <img src="/images/solarized-dark.png"> <img src="/images/solarized-light.png"></p></li>
 <li><p>I prefer Chen’s setting. I felt it’s faster than Spacemacs and still easy for me to plugin anything else in due to the clear structure.</p></li>
 </ol>
-<h2 id="some-configuration-steps-i-went-through">Some Configuration Steps I Went Through</h2>
+<h3 id="some-configuration-steps-i-went-through">Some Configuration Steps I Went Through</h3>
 <p><a href="https://github.com/xueyouchao/todo/blob/master/EmacsToDo.org" target="_blank" rel="external">In Org Mode, best read in emacs org-indent-mode</a></p>
 ]]></content>
     
@@ -151,7 +151,7 @@ Spacemacs has very good documentation explaining its structure. The package mana
     <link href="https://xueyouchao.github.io/2016/11/16/CompileTimeString/"/>
     <id>https://xueyouchao.github.io/2016/11/16/CompileTimeString/</id>
     <published>2016-11-16T05:12:21.000Z</published>
-    <updated>2017-02-24T05:08:49.447Z</updated>
+    <updated>2017-02-24T05:22:17.812Z</updated>
     
     <content type="html"><![CDATA[<p>String comparison is a relatively slow operation and some times not tolerable. Especially when you have many if..else.. (or switch/case) code like this:<br>
 if (mode == “StateA”) {<br>
@@ -161,7 +161,7 @@ else if (mode == “StateB”) {<br>
 …<br>
 }</p>
 <p>The first thought come in mind is to use hash function to speed up the comparison operation; so we can improve the time complexity from O(<span class="math inline">\(n^2\)</span>) to O(1). How can we do better? Make the hash calculation on compile time so it saves some extra run-time cost for constant string hash calculation and let the compiler do the job for you.</p>
-<h2 id="c98-solutions">c++98 solutions</h2>
+<h3 id="c98-solutions">c++98 solutions</h3>
 <p>Before c++11, c++98 solutions are not perfect. Such as:</p>
 <ul>
 <li><a href="http://www.gamasutra.com/view/news/127915/InDepth_Quasi_CompileTime_String_Hashing.php" target="_blank" rel="external">quasi compile time string hashing</a><br>
@@ -170,7 +170,7 @@ Cons: This solution does not work for “switch/case” statements.<br>
 <li><a href="http://arcticinteractive.com/2009/04/18/compile-time-string-hashing-boost-mpl/" target="_blank" rel="external">using Boost.MPL</a><br>
 Cons: This solution needs to separate strings into groups.</li>
 </ul>
-<h2 id="c11c14-solutions">c++11/c++14 solutions</h2>
+<h3 id="c11c14-solutions">c++11/c++14 solutions</h3>
 <p>In c++11/c++14, constexpr provides us a new way to the perfect solution for compile time string hashing. However different c++ compilers support the new standard differently and we still need to make sure the code is fully tested on multiple compilers.</p>
 <p>So first let’s first pick up an easy Hash function to start. The trick is to utilize the c++11</p>
 <ul>
