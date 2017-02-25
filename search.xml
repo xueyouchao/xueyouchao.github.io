@@ -9,14 +9,14 @@
       <content type="html"><![CDATA[<p>Lock-free Ring Queue - What is it? In a nutshell: it is a data structure facilitating inter-thread messaging communication.</p>
 <h3 id="a-little-history">A little history</h3>
 <ul>
-<li><p>Lock-free ring queue datastructure attracted a lot of attention in the concurrency world because of the name LMAX Disruptor in <a href="http://www.oracle.com/us/corporate/press/512656" target="_blank" rel="external">2011</a>. You can still find the presentation back on Dec 2010 <a href="https://www.infoq.com/presentations/LMAX" target="_blank" rel="external">here</a>. Never heared of Disruptor? Spring framework uses it undernearth since <a href="https://spring.io/blog/2013/11/12/it-can-t-just-be-big-data-it-has-to-be-fast-data-reactor-1-0-goes-ga" target="_blank" rel="external">2013</a>.</p></li>
-<li>The lock-free ring queue was sit at the core of Disruptor.<br>
+<li>Lock-free ring queue datastructure attracted a lot of attention in the concurrency world because of the name LMAX Disruptor in <a href="http://www.oracle.com/us/corporate/press/512656" target="_blank" rel="external">2011</a>. You can still find the presentation back on Dec 2010 <a href="https://www.infoq.com/presentations/LMAX" target="_blank" rel="external">here</a>. Never heared of Disruptor? Spring framework uses it undernearth since <a href="https://spring.io/blog/2013/11/12/it-can-t-just-be-big-data-it-has-to-be-fast-data-reactor-1-0-goes-ga" target="_blank" rel="external">2013</a>.</li>
+<li>The lock-free ring queue is at the core of Disruptor.<br>
 </li>
 <li>The same data structure was in BSD code back in <a href="https://svnweb.freebsd.org/base/head/sys/sys/buf_ring.h?view=markup&amp;pathrev=185162" target="_blank" rel="external">2008</a>.<br>
 </li>
 <li>The same data structure is used in <a href="http://lxr.free-electrons.com/source/include/linux/kfifo.h" target="_blank" rel="external">linux kernel</a>.<br>
 </li>
-<li><p>Also in famous intel <a href="http://dpdk.org/browse/dpdk/tree/lib/librte_ring/rte_ring.h" target="_blank" rel="external">DPDK framework</a>.</p></li>
+<li>Also in famous intel <a href="http://dpdk.org/browse/dpdk/tree/lib/librte_ring/rte_ring.h" target="_blank" rel="external">DPDK framework</a>.</li>
 </ul>
 <h3 id="why-redo-the-wheel-in-c11">Why redo the wheel in C++11 ?</h3>
 <p>You might ask there are so many implementations available now, why do we redo it in c++11?</p>
@@ -35,12 +35,12 @@ private:
     const static uint32_t size = RING_BUFFER_SIZE;
     const static uint32_t mask = size - 1;
 
-    struct alignas(CACHE_LINE_SIZE) prod {
+    struct prod {
         std::atomic&lt;uint32_t&gt;  alignas(CACHE_LINE_SIZE) first;
         std::atomic&lt;uint32_t&gt;  alignas(CACHE_LINE_SIZE) second;
     }writer;
 
-    struct alignas(CACHE_LINE_SIZE) consumer {
+    struct consumer {
         std::atomic&lt;uint32_t&gt;  alignas(CACHE_LINE_SIZE) first;
         std::atomic&lt;uint32_t&gt;  alignas(CACHE_LINE_SIZE) second;
     }reader;
