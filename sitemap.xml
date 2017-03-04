@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xueyouchao.github.io/2017/03/02/Build-Chromium-Embeded-Framework-in-Manjaro-Linux/</loc>
+    
+    <lastmod>2017-03-04T20:04:00.101Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xueyouchao.github.io/2017/02/26/Lock-Free-Ring-Queue-for-Multi-producer-and-Multi-consumer/</loc>
     
     <lastmod>2017-02-27T01:43:05.324Z</lastmod>
