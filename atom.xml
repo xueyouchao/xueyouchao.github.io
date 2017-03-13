@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xueyouchao.github.io/"/>
-  <updated>2017-03-04T20:04:00.101Z</updated>
+  <updated>2017-03-13T05:57:14.080Z</updated>
   <id>https://xueyouchao.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://xueyouchao.github.io/2017/03/02/Build-Chromium-Embeded-Framework-in-Manjaro-Linux/"/>
     <id>https://xueyouchao.github.io/2017/03/02/Build-Chromium-Embeded-Framework-in-Manjaro-Linux/</id>
     <published>2017-03-02T05:12:21.000Z</published>
-    <updated>2017-03-04T20:04:00.101Z</updated>
+    <updated>2017-03-13T05:57:14.080Z</updated>
     
     <content type="html"><![CDATA[<h3 id="different-approaches-to-integrate-a-webbrowserwebview-into-your-desktop-applications.">Different Approaches to Integrate a WebBrowser/WebView into Your Desktop Applications.</h3>
 <ul>
@@ -52,11 +52,14 @@ On ArchLinux, run <em>sudo pacman -S ninja</em> and <em>sudo pacman -S cmake</em
   FIND_LINUX_LIBRARIES(&quot;gthread-2.0&quot;)
   FIND_LINUX_LIBRARIES(&quot;gtk+-unix-print-2.0&quot;)
   FIND_LINUX_LIBRARIES(&quot;gtkglext-1.0&quot;)</code></pre>
-<p>Compile it again, get error <gtk gtkgl.h=""> not found. <code>sudo pacman -S gtkglext</code> Done. So during the compiling step the only package you need to install in Manjaro Linux is gtkglext.</gtk></p>
+<p>Compile it again, get error gtk/gtkgl.h not found. <code>sudo pacman -S gtkglext</code> Done. So during the compiling step the only package you need to install in Manjaro Linux is gtkglext.</p>
 <ul>
-<li>Run the command following the build instruction. EXE=“/path/to/cef_binary/build/cefclient/Debug/chrome-sandbox” &amp;&amp; sudo – chown root:root $EXE &amp;&amp; sudo – chmod 7455 $EXE cd /path/to/cefclient ./cefclient You will see a simple chrome embeded desktop application runs:<br>
-<img src="/images/cef.png"></li>
+<li>Run the following command after the compiling finished</li>
 </ul>
+<p>EXE=“/path/to/cef_binary/build/cefclient/Debug/chrome-sandbox” &amp;&amp; sudo – chown root:root $EXE &amp;&amp; sudo – chmod 7455 $EXE cd /path/to/cefclient<br>
+./cefclient<br>
+You will see a simple chrome embeded desktop application runs:<br>
+<img src="/images/cef.png"></p>
 ]]></content>
     
     <summary type="html">

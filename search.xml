@@ -36,11 +36,14 @@ On ArchLinux, run <em>sudo pacman -S ninja</em> and <em>sudo pacman -S cmake</em
   FIND_LINUX_LIBRARIES(&quot;gthread-2.0&quot;)
   FIND_LINUX_LIBRARIES(&quot;gtk+-unix-print-2.0&quot;)
   FIND_LINUX_LIBRARIES(&quot;gtkglext-1.0&quot;)</code></pre>
-<p>Compile it again, get error <gtk gtkgl.h=""> not found. <code>sudo pacman -S gtkglext</code> Done. So during the compiling step the only package you need to install in Manjaro Linux is gtkglext.</gtk></p>
+<p>Compile it again, get error gtk/gtkgl.h not found. <code>sudo pacman -S gtkglext</code> Done. So during the compiling step the only package you need to install in Manjaro Linux is gtkglext.</p>
 <ul>
-<li>Run the command following the build instruction. EXE=“/path/to/cef_binary/build/cefclient/Debug/chrome-sandbox” &amp;&amp; sudo – chown root:root $EXE &amp;&amp; sudo – chmod 7455 $EXE cd /path/to/cefclient ./cefclient You will see a simple chrome embeded desktop application runs:<br>
-<img src="/images/cef.png"></li>
+<li>Run the following command after the compiling finished</li>
 </ul>
+<p>EXE=“/path/to/cef_binary/build/cefclient/Debug/chrome-sandbox” &amp;&amp; sudo – chown root:root $EXE &amp;&amp; sudo – chmod 7455 $EXE cd /path/to/cefclient<br>
+./cefclient<br>
+You will see a simple chrome embeded desktop application runs:<br>
+<img src="/images/cef.png"></p>
 ]]></content>
       
         
