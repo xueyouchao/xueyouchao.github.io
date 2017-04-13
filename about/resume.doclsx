@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="youchao-xue">Youchao Xue</h1>
+<table>
+<colgroup>
+<col width="24%" />
+<col width="33%" />
+<col width="41%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">PHONE: 781-332-2822</td>
+<td align="left">EMAIL: xueyouchao@gmail.com</td>
+<td>Work Authorization: Greencard Holder</td>
+</tr>
+</tbody>
+</table>
+<h3 id="technical-skills">Technical Skills</h3>
+<p><strong>C/C++98 &amp;&amp; C++11</strong> - Strong experience and knowledge of C/C++ including object oriented design, c++ template programming, template meta-programming, multithreading programming, advanced knowledge of c++11 multithreading, concurrency and lock-free programming. Fluent skill of using STL, BOOST, Qt library and many more.</p>
+<p><strong>C# &amp; .net language</strong> - Strong skill on c# and .net programming, fluent skill of using P/Invoke (or c++/cli) mixing with c++ native code. Familiar with c# async and multithreading programming.</p>
+<p><strong>Java</strong> - Familiar with popular frameworks including Struts2, Spring; knowledge of advanced Java concurrency technology and low level multi-threading messaging library LMax Disruptor.</p>
+<p><strong>Others</strong> - Strong knowledge on design pattern and UI programming; expert knowledge and experience on MVC architecture for web/desktop/mobile application. Knowledge and experience on Go language and its CSP model. Knowledge of different concurrency approaches including SIMD, multithreading,functional programming, Actor, CSP, GPGPU etc.</p>
+<p><strong>Developing Environment &amp; Building Tools</strong><br />
+* Emacs on Manjaro Linux, Visual Studio + Visual Assist X on Windows<br />
+* Using cmake,<a href="http://floooh.github.io/fips/getstarted.html">Fips</a>,<a href="https://github.com/bkaradzic/GENie">GENie</a> to generate and compiles c++ projects cross compilers and different OS platforms including Windows, Linux, OSX, iOS, Android,asm.js/Emscripten(superior web browser solution), PNaCl etc.</p>
+<p><strong>Certification</strong> - CISSP (Certified Information Systems Security Professional)</p>
+<h3 id="work-experience">Work Experience</h3>
+<p><strong>Senior Software Engineer and Consultant at Primeon Inc., Boston</strong>    <em>Apr 2012 ~ Current</em><br />
+* Performing code review, vulnerability assessment for several top 500 corporations’ major framework and server side code as well as Android and iOS mobile client side code (or hybrid client using webview such as Cordova).<br />
+* Architectural consultancy experience on Federation Single Signon, SOA and Micro-service architecture, RESTful service API design.<br />
+* Developing in-house tool chain used by team for daily jobs.</p>
+<p><strong>3D Graphics Developer at Weatherford International, UK</strong>    <em>July 2009 ~ Apr 2012</em><br />
+* Developing and maintaining the 3D module of flagship software 5D, a directional well planning and survey system that uses 3D visualization for collision avoidance. Refactoring large code base and adding many new features including multi-3D Opengl scene rendering into multiple Qt viewers; free roaming camera control, 3D Ray picking for interactive operation on 3D viewer.</p>
+<p><em>Other key contributions:</em> In the project of drilling relief well for Gulf of Mexico accident, developed a small 3D application to feed real time drilling data into 3D visualization viewer and provided quaternion based free roaming camera control, used by our senior consultant Angus Jamieson and Houston Team to complete one of the most challenging task in directional drilling area.</p>
+<p><strong>Software Engineer at Huawei Technologies Co. Ltd., P.R. China</strong>    <em>Aug 2005 ~ Nov 2006</em><br />
+* Joined several national level telecommunication projects, went through the full life cycle of software development, including project planning, requirements analysis, design, coding, debugging, unit testing, system integration testing and release.</p>
+<h3 id="personal-side-projects">Personal Side Projects</h3>
+<p>Technical Blog: <a href="https://xueyouchao.github.io" class="uri">https://xueyouchao.github.io</a><br />
+Projects Demos: <a href="http://youchaosdevelopment.blogspot.com/2009/03/few-videos-show-my-editor.html" class="uri">http://youchaosdevelopment.blogspot.com/2009/03/few-videos-show-my-editor.html</a></p>
+<p><a href="https://xueyouchao.github.io/2017/02/26/Lock-Free-Ring-Queue-for-Multi-producer-and-Multi-consumer/"><strong>Lock Free Ring Queue for Multi-producer, Multi-consumer in c++11</strong></a><br />
+Demonstration of using C++11 to implement high efficient data structure for lock-free programming.</p>
+<p><a href="https://xueyouchao.github.io/"><strong>Personal Technical Blog on Github</strong></a><br />
+A technical blog built with Markdown, Hexo on Github pages.</p>
+<p><a href="http://youchaosdevelopment.blogspot.com/2009/02/world-of-champloo.html"><strong>3D C++ Networking Game</strong></a><br />
+Our team with 2 programmers and 3 artists developed this game for Dare to be Digital competition exibited in Edinburgh International Conference Center,completed the game with split screen version(using XBOX controller) and networking version in less than 2 months in 2008 using OGRE3D for 3D rendering engine, Physx for Physics engine, OpenAL for game audio, CEGUI for in game GUI, Raknet for UDP networking communication.</p>
+<p><a href="http://youchaosdevelopment.blogspot.com/2009/03/few-videos-show-my-editor.html"><strong>3D Editor for OGRE3D Engine with .net</strong></a><br />
+My personal side project including the following features:<br />
+* Visual studio style dockable .net window for rendering multiple 3D scene, editor layout load/save from/to xml files<br />
+* 3D scene, model animations serialization/deserialization to/from XML files<br />
+* All the properties can be configured through unified .net property grid etc.</p>
+<h3 id="education">Education</h3>
+<p><strong>University of Abertay Dundee,UK</strong>    <em>July 2007 ~ May 2009</em><br />
+MSc Degree with Distinction in Computer Games Technology</p>
+<p><strong>Nanjing University of Aeronautics and Astronautics,China</strong>    <em>Sep 2001 ~ July 2005</em><br />
+Bachelor Degree in Information and Computational Science specialized subject</p>
+</body>
+</html>
