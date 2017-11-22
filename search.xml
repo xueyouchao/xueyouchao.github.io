@@ -9,13 +9,13 @@
       <content type="html"><![CDATA[<h3 id="different-approaches-to-integrate-a-webbrowserwebview-into-your-desktop-applications.">Different Approaches to Integrate a WebBrowser/WebView into Your Desktop Applications.</h3>
 <ul>
 <li><p>Easy 3D Render To Texture Approach<br>
-<a href="http://www.awesomium.com" target="_blank" rel="external">Awesomium</a>(base on Webkit) - this project started from Ogre3d showcase forum back in 2009 when I was still in school. Then it said goodbye to Ogre community and went commercial. It still reminds me the happy time I was building <a href="http://youchaosdevelopment.blogspot.com/2009/02/world-of-champloo.html" target="_blank" rel="external">games and editors</a> using a C++ game engine(No offense, it feels better to write C++ than drag and drop Unity3D script even that’s a much easier way.). Ogre3D - a great game engine that teaches me Design Pattern and many things for software architecture. I would definitely recommend <a href="https://www.amazon.com/Engine-Architecture-Second-Jason-Gregory/dp/1466560010" target="_blank" rel="external">“Game Engine Architecture”</a> book to anyone who is interested on understanding Ogre3D and a proper game engine architecture.<br>
-I gave a try today on Awesomium, it still works but the problem I found is that for some HTML5 featured site, it doesn’t work and I got a message asking me to upgrade my browser. I guess it’s because the project hasn’t been updated for 2 years and the underlying webkit support maybe outdated.</p></li>
+<a href="http://www.awesomium.com" target="_blank" rel="noopener">Awesomium</a>(base on Webkit) - this project started from Ogre3d showcase forum back in 2009 when I was still in school. Then it said goodbye to Ogre community and went commercial. It still reminds me the happy time I was building <a href="http://youchaosdevelopment.blogspot.com/2009/02/world-of-champloo.html" target="_blank" rel="noopener">games and editors</a> using a C++ game engine(No offense, it feels better to write C++ than drag and drop Unity3D script even that's a much easier way.). Ogre3D - a great game engine that teaches me Design Pattern and many things for software architecture. I would definitely recommend <a href="https://www.amazon.com/Engine-Architecture-Second-Jason-Gregory/dp/1466560010" target="_blank" rel="noopener">&quot;Game Engine Architecture&quot;</a> book to anyone who is interested on understanding Ogre3D and a proper game engine architecture.<br>
+I gave a try today on Awesomium, it still works but the problem I found is that for some HTML5 featured site, it doesn't work and I got a message asking me to upgrade my browser. I guess it's because the project hasn't been updated for 2 years and the underlying webkit support maybe outdated.</p></li>
 <li><p>In visual studio , drag and drop a .net webview UI component on your c# project and you have it. But who wants a webview with IE core?</p></li>
-<li><p>Integrate one of the major browser core into your desktop application. (Firefox Gecko, Chromium Blink, Safari Webkit or IE Trident etc.) Among those using Google Chromium based browser became a very popular solution. You can find successful example such as <a href="https://crosswalk-project.org/documentation/about/demos.html" target="_blank" rel="external">Crosswalk</a> which not only brings the chromium browser/webview to desktop but also mobile platform. Other famous ones include Electron and NW.js which did great job to bring Chromium to desktop. Another popular solution came out for a few years is CEF(chromium embeded framework). I have seen many html5 UI style desktop applicaiton which uses this framework such as <a href="https://github.com/netease-youdao/hex" target="_blank" rel="external">HEX</a>.</p></li>
+<li><p>Integrate one of the major browser core into your desktop application. (Firefox Gecko, Chromium Blink, Safari Webkit or IE Trident etc.) Among those using Google Chromium based browser became a very popular solution. You can find successful example such as <a href="https://crosswalk-project.org/documentation/about/demos.html" target="_blank" rel="noopener">Crosswalk</a> which not only brings the chromium browser/webview to desktop but also mobile platform. Other famous ones include Electron and NW.js which did great job to bring Chromium to desktop. Another popular solution came out for a few years is CEF(chromium embeded framework). I have seen many html5 UI style desktop applicaiton which uses this framework such as <a href="https://github.com/netease-youdao/hex" target="_blank" rel="noopener">HEX</a>.</p></li>
 </ul>
 <h3 id="building-cef-on-manjaro-linux">Building CEF on Manjaro Linux</h3>
-<p>Since my purpose is to integrate CEF into my application, I choose to use the CEF binaries directly. Make sure to download the latest binaries from <a href="http://opensource.spotify.com/cefbuilds/index.html" target="_blank" rel="external">here</a>. (I used cef_binary_3.2924.1575.g97389a9, an early version will give you a annoying run time error about libgcrypt11.so not found.)</p>
+<p>Since my purpose is to integrate CEF into my application, I choose to use the CEF binaries directly. Make sure to download the latest binaries from <a href="http://opensource.spotify.com/cefbuilds/index.html" target="_blank" rel="noopener">here</a>. (I used cef_binary_3.2924.1575.g97389a9, an early version will give you a annoying run time error about libgcrypt11.so not found.)</p>
 <p>The building steps are cleared in the CMakelists.txt. On linux, you can choose ninja or Gnu Make to build the examples.</p>
 <ul>
 <li><p>Make sure to install CMake 2.8.12.1 or newer version; install ninja build tools.<br>
@@ -23,14 +23,14 @@ On ArchLinux, run <em>sudo pacman -S ninja</em> and <em>sudo pacman -S cmake</em
 <li><p>Run the following commands<br>
 &gt; cd path/to/cef_binary<br>
 &gt; mkdir build &amp;&amp; cd build<br>
-&gt; cmake -G “Ninja” -DCMAKE_BUILD_TYPE=Debug ..<br>
+&gt; cmake -G &quot;Ninja&quot; -DCMAKE_BUILD_TYPE=Debug ..<br>
 &gt; ninja cefclient cefsimple</p></li>
 <li><p>Then I get the following error: ../cefclient/browser/client_types.h:12:21: fatal error gtk/gtk.h: No such file or directory<br>
 <img src="/images/gtkerror.png"></p></li>
 </ul>
-<p>What is going on? If you read the comments in CmakeLists.txt, ArchLinux based family was not in the supported distribution list and there are three required packages: build-essential, libgtk2.0-dev, libgtkglext1-dev. I can’t find those packages in Pacman repos, do I really need to install those? Lets’s check gtk/gtk.h path by running <em>sudo pacman -Ql gtk2</em> and <em>pkg-config –cflags –libs gtk+-2.0</em>. It’s in my /usr/include folder. It seems GTK2.0+- and GTK3.0+- comes with manjaro distro.(Manjaro is an Arch Linux with customized desktop.) So it seems cmake can not find the GTK path. Rgrep(emacs command) “gtk+-2.0” and I found this line in CEF CmakeLists.txt file:</p>
+<p>What is going on? If you read the comments in CmakeLists.txt, ArchLinux based family was not in the supported distribution list and there are three required packages: build-essential, libgtk2.0-dev, libgtkglext1-dev. I can't find those packages in Pacman repos, do I really need to install those? Lets's check gtk/gtk.h path by running <em>sudo pacman -Ql gtk2</em> and <em>pkg-config --cflags --libs gtk+-2.0</em>. It's in my /usr/include folder. It seems GTK2.0+- and GTK3.0+- comes with manjaro distro.(Manjaro is an Arch Linux with customized desktop.) So it seems cmake can not find the GTK path. Rgrep(emacs command) &quot;gtk+-2.0&quot; and I found this line in CEF CmakeLists.txt file:</p>
 <pre><code>FIND_LINUX_LIBRARIES(&quot;gmodule-2.0 gtk+-2.0 gthread-2.0 gtk+-unix-print-2.0 gtkglext-1.0&quot;)</code></pre>
-<p>This macro is defined in cef_macros.cmake:142 for reading pkg-config into cmake. Change this one line in CMakeLists.txt into multiple lines, passing libraries’ names one by one.</p>
+<p>This macro is defined in cef_macros.cmake:142 for reading pkg-config into cmake. Change this one line in CMakeLists.txt into multiple lines, passing libraries' names one by one.</p>
 <pre><code>  FIND_LINUX_LIBRARIES(&quot;gmodule-2.0&quot;)
   FIND_LINUX_LIBRARIES(&quot;gtk+-2.0&quot;)
   FIND_LINUX_LIBRARIES(&quot;gthread-2.0&quot;)
@@ -40,7 +40,7 @@ On ArchLinux, run <em>sudo pacman -S ninja</em> and <em>sudo pacman -S cmake</em
 <ul>
 <li>Run the following command after the compiling finished</li>
 </ul>
-<p>EXE=“/path/to/cef_binary/build/cefclient/Debug/chrome-sandbox” &amp;&amp; sudo – chown root:root $EXE &amp;&amp; sudo – chmod 7455 $EXE cd /path/to/cefclient<br>
+<p>EXE=&quot;/path/to/cef_binary/build/cefclient/Debug/chrome-sandbox&quot; &amp;&amp; sudo -- chown root:root $EXE &amp;&amp; sudo -- chmod 7455 $EXE cd /path/to/cefclient<br>
 ./cefclient<br>
 You will see a simple chrome embeded desktop application runs:<br>
 <img src="/images/cef.png"></p>
@@ -61,20 +61,20 @@ You will see a simple chrome embeded desktop application runs:<br>
       <content type="html"><![CDATA[<p>Lock-free Ring Queue - What is it? In a nutshell: it is a data structure facilitating inter-thread messaging communication.</p>
 <h3 id="a-little-history">A little history</h3>
 <ul>
-<li>Lock-free ring queue datastructure attracted a lot of attention in the concurrency world because of the name LMAX Disruptor in <a href="http://www.oracle.com/us/corporate/press/512656" target="_blank" rel="external">2011</a>. You can still find the presentation back on Dec 2010 <a href="https://www.infoq.com/presentations/LMAX" target="_blank" rel="external">here</a>. Never heared of Disruptor? Spring framework uses it undernearth since <a href="https://spring.io/blog/2013/11/12/it-can-t-just-be-big-data-it-has-to-be-fast-data-reactor-1-0-goes-ga" target="_blank" rel="external">2013</a>.</li>
+<li>Lock-free ring queue datastructure attracted a lot of attention in the concurrency world because of the name LMAX Disruptor in <a href="http://www.oracle.com/us/corporate/press/512656" target="_blank" rel="noopener">2011</a>. You can still find the presentation back on Dec 2010 <a href="https://www.infoq.com/presentations/LMAX" target="_blank" rel="noopener">here</a>. Never heared of Disruptor? Spring framework uses it undernearth since <a href="https://spring.io/blog/2013/11/12/it-can-t-just-be-big-data-it-has-to-be-fast-data-reactor-1-0-goes-ga" target="_blank" rel="noopener">2013</a>.</li>
 <li>The lock-free ring queue is at the core of Disruptor.<br>
 </li>
-<li>The same data structure was in BSD code back in <a href="https://svnweb.freebsd.org/base/head/sys/sys/buf_ring.h?view=markup&amp;pathrev=185162" target="_blank" rel="external">2008</a>.<br>
+<li>The same data structure was in BSD code back in <a href="https://svnweb.freebsd.org/base/head/sys/sys/buf_ring.h?view=markup&amp;pathrev=185162" target="_blank" rel="noopener">2008</a>.<br>
 </li>
-<li>The same data structure is used in <a href="http://lxr.free-electrons.com/source/include/linux/kfifo.h" target="_blank" rel="external">linux kernel</a>.<br>
+<li>The same data structure is used in <a href="http://lxr.free-electrons.com/source/include/linux/kfifo.h" target="_blank" rel="noopener">linux kernel</a>.<br>
 </li>
-<li>Also in famous intel <a href="http://dpdk.org/browse/dpdk/tree/lib/librte_ring/rte_ring.h" target="_blank" rel="external">DPDK framework</a>.</li>
+<li>Also in famous intel <a href="http://dpdk.org/browse/dpdk/tree/lib/librte_ring/rte_ring.h" target="_blank" rel="noopener">DPDK framework</a>.</li>
 </ul>
 <h3 id="why-redo-the-wheel-in-c11">Why redo the wheel in C++11 ?</h3>
 <p>You might ask there are so many implementations available now, why do we redo it in c++11?</p>
-<p>One of the biggest benefit C++11 brought to us IMHO is its multithreading memory model and atomics library. Imagine without these two how much work do you need to do to make sure your multi-threading code will run correctly on different OS and CPU architecture. In the multi-core hardware era c++11 brought us powerful weapons that enable both sequential consistency and weakly ordered multithreading models for our multithreading programming to squeeze our hardware’s true power. We have a good start then we can build up better world to compete with Java, Rust, Go, Clojure,Erlang, Haskell, Scala etc. in this concurrent world.</p>
+<p>One of the biggest benefit C++11 brought to us IMHO is its multithreading memory model and atomics library. Imagine without these two how much work do you need to do to make sure your multi-threading code will run correctly on different OS and CPU architecture. In the multi-core hardware era c++11 brought us powerful weapons that enable both sequential consistency and weakly ordered multithreading models for our multithreading programming to squeeze our hardware's true power. We have a good start then we can build up better world to compete with Java, Rust, Go, Clojure,Erlang, Haskell, Scala etc. in this concurrent world.</p>
 <h3 id="talk-is-cheap-show-me-the-code">Talk is cheap, show me the code</h3>
-<p>Here I will present a deadly simple lock-free MPMC(multi-producer, multi-consumer) ring queue implementation in c++11. The C implementation can be found at dpdk <a href="http://dpdk.org/browse/dpdk/tree/lib/librte_ring" target="_blank" rel="external">git</a>. Ring queue’s documentation can be also found at dpdk <a href="http://dpdk.org/doc/guides/prog_guide/ring_lib.html" target="_blank" rel="external">site</a>.</p>
+<p>Here I will present a deadly simple lock-free MPMC(multi-producer, multi-consumer) ring queue implementation in c++11. The C implementation can be found at dpdk <a href="http://dpdk.org/browse/dpdk/tree/lib/librte_ring" target="_blank" rel="noopener">git</a>. Ring queue's documentation can be also found at dpdk <a href="http://dpdk.org/doc/guides/prog_guide/ring_lib.html" target="_blank" rel="noopener">site</a>.</p>
 <p>In my simplest version, I have only implemented push/pop so far for an easy start; no bulk operations, no watermark notification, no dynamic size adjustments for the buffer.</p>
 <pre><code>constexpr uint64_t RING_BUFFER_SIZE = 2 &lt;&lt; 10;
 constexpr uint64_t CACHE_LINE_SIZE = 64;
@@ -174,12 +174,12 @@ public:
 
 };</code></pre>
 <h3 id="class-memebers">Class Memebers</h3>
-<p>First let’s look at ring queue class members:</p>
+<p>First let's look at ring queue class members:</p>
 <p>A few points to mention here:</p>
 <ul>
 <li><p>The fixed size of ring queue is usually power of 2, the reason for this is that you can use <code>pointer &amp; (RING_BUFFER_SIZE-1)</code> instead of <code>pointer % RING_BUFFER_SIZE</code> for a pointer to circle back and point to the beginning of the ring queue.</p></li>
-<li><p>The prod/consumer each contains first/second pointers (equivalent to prod/consumer’s head and tail in DPDK). The reason it needs first and second pointers is explained down below.</p></li>
-<li><p><code>alignas(CACHE_LINE_SIZE)</code> used here is to prevent false sharing to happen. If you don’t know what is false sharing, <a href="https://nativecoding.wordpress.com/2015/06/19/multithreading-multicore-programming-and-false-sharing-benchmark/" target="_blank" rel="external">here</a> is a simple and excellent explanation. Before c++11 this is done through padding chars, but now we can use new syntax <code>alignas</code>.</p></li>
+<li><p>The prod/consumer each contains first/second pointers (equivalent to prod/consumer's head and tail in DPDK). The reason it needs first and second pointers is explained down below.</p></li>
+<li><p><code>alignas(CACHE_LINE_SIZE)</code> used here is to prevent false sharing to happen. If you don't know what is false sharing, <a href="https://nativecoding.wordpress.com/2015/06/19/multithreading-multicore-programming-and-false-sharing-benchmark/" target="_blank" rel="noopener">here</a> is a simple and excellent explanation. Before c++11 this is done through padding chars, but now we can use new syntax <code>alignas</code>.</p></li>
 <li><p>simple_spin_wait will be explained in a separate topic.</p></li>
 </ul>
 ]]></content>
@@ -204,37 +204,37 @@ public:
     <entry>
       <title><![CDATA[Journey of Emacs]]></title>
       <url>https://xueyouchao.github.io/2017/02/22/Journey-of-Emacs/</url>
-      <content type="html"><![CDATA[<p>I have switched my programming environment to Manjaro Linux recently. So I started to give a try on legendary editor Emacs for development. I started with zero basics for Emacs and spent only 2 week’s spare time to get used to writing code and blog with it.</p>
+      <content type="html"><![CDATA[<p>I have switched my programming environment to Manjaro Linux recently. So I started to give a try on legendary editor Emacs for development. I started with zero basics for Emacs and spent only 2 week's spare time to get used to writing code and blog with it.</p>
 <h3 id="standing-on-the-shoulders-of-giants">Standing on the Shoulders of Giants</h3>
 <ul>
-<li>Do not blindly start to learn Emacs commands or lisp language, learning without helping you to achieve your goal will make you give up soon. You should start from guru’s setup to achieve what you want to do and learn the commands and everyting along the way.</li>
-<li>I started by taking advice from Chen Bin <a href="https://github.com/redguardtoo" target="_blank" rel="external">redguardtoo</a>. Quickly read his post <a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide" target="_blank" rel="external">“mastering-emacs-in-one-year-guide”</a>.</li>
-<li>Followed the recommendation, I spent a little time going through the emacs tutorial. ThenI downloaded his <a href="https://github.com/redguardtoo/emacs.d" target="_blank" rel="external">configuration</a> to play around.</li>
+<li>Do not blindly start to learn Emacs commands or lisp language, learning without helping you to achieve your goal will make you give up soon. You should start from guru's setup to achieve what you want to do and learn the commands and everyting along the way.</li>
+<li>I started by taking advice from Chen Bin <a href="https://github.com/redguardtoo" target="_blank" rel="noopener">redguardtoo</a>. Quickly read his post <a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide" target="_blank" rel="noopener">&quot;mastering-emacs-in-one-year-guide&quot;</a>.</li>
+<li>Followed the recommendation, I spent a little time going through the emacs tutorial. ThenI downloaded his <a href="https://github.com/redguardtoo/emacs.d" target="_blank" rel="noopener">configuration</a> to play around.</li>
 <li>Very importantly, write down the important steps. Emacs has powerful plugin management functionality, when you made so many customizations to emacs you want to make sure to write down the steps.</li>
 </ul>
 <h3 id="explore-the-world-of-emacs">Explore the World of Emacs</h3>
 <ul>
-<li>So many good things guru’s has setup for you. Try it.<br>
+<li>So many good things guru's has setup for you. Try it.<br>
 </li>
 </ul>
 <ol style="list-style-type: decimal">
-<li>Spent half an hour to learn basics of Org Mode and play with M-Org-Indent-Mode in Chen’s setup. You can write down the steps using org-indent-mode as I did. <img src="/images/org-mode.png"><br>
+<li>Spent half an hour to learn basics of Org Mode and play with M-Org-Indent-Mode in Chen's setup. You can write down the steps using org-indent-mode as I did. <img src="/images/org-mode.png"><br>
 </li>
 <li>Configure neotree and install all-the-icons package for it</li>
 <li>Configure c++ packages for development</li>
 <li>Use Git version control in emacs with magit</li>
-<li>Write blog in Markdown mode which is pretty much I am doing now. …</li>
+<li>Write blog in Markdown mode which is pretty much I am doing now. ...</li>
 </ol>
 <h3 id="two-configurations-i-recommended">Two Configurations I Recommended</h3>
 <ol style="list-style-type: decimal">
-<li><p>Chen Bin’s setup <a href="%22https://github.com/redguardtoo%22">redguardtoo</a><br>
+<li><p>Chen Bin's setup <a href="%22https://github.com/redguardtoo%22">redguardtoo</a><br>
 It comes with pretty much everything I need and a very clear structure inherit from Steve Purcell. The theme is very beautiful and the font colors are very comfortable for me to write programming code. Note that Chen carefully pick the stable version of ELPA packages and you need to add unstaple exceptions in his configuration file to see the package in package installation list.</p></li>
-<li><p><a href="http://spacemacs.org/" target="_blank" rel="external">Spacemacs</a><br>
-Spacemacs has very good documentation explaining its structure. The package management module of Spacemacs utilizes the packages as building blocks and assemble them into layers. You can customize your layers with all these building blocks. Be sure to checkout the awesome <a href="https://github.com/sellout/emacs-color-theme-solarized" target="_blank" rel="external">emacs port for solarized theme</a>. A screenshot of my spacemacs workspace shows this beautiful theme. <img src="/images/solarized-dark.png"> <img src="/images/solarized-light.png"></p></li>
-<li><p>I prefer Chen’s setting. I felt it’s faster than Spacemacs and still easy for me to plugin anything else in due to the clear structure.</p></li>
+<li><p><a href="http://spacemacs.org/" target="_blank" rel="noopener">Spacemacs</a><br>
+Spacemacs has very good documentation explaining its structure. The package management module of Spacemacs utilizes the packages as building blocks and assemble them into layers. You can customize your layers with all these building blocks. Be sure to checkout the awesome <a href="https://github.com/sellout/emacs-color-theme-solarized" target="_blank" rel="noopener">emacs port for solarized theme</a>. A screenshot of my spacemacs workspace shows this beautiful theme. <img src="/images/solarized-dark.png"> <img src="/images/solarized-light.png"></p></li>
+<li><p>I prefer Chen's setting. I felt it's faster than Spacemacs and still easy for me to plugin anything else in due to the clear structure.</p></li>
 </ol>
 <h3 id="some-configuration-steps-i-went-through">Some Configuration Steps I Went Through</h3>
-<p><a href="https://github.com/xueyouchao/todo/blob/master/EmacsToDo.org" target="_blank" rel="external">In Org Mode, best read in emacs org-indent-mode</a></p>
+<p><a href="https://github.com/xueyouchao/todo/blob/master/EmacsToDo.org" target="_blank" rel="noopener">In Org Mode, best read in emacs org-indent-mode</a></p>
 ]]></content>
       
         
@@ -252,33 +252,33 @@ Spacemacs has very good documentation explaining its structure. The package mana
       <title><![CDATA[Compile Time String Hashing]]></title>
       <url>https://xueyouchao.github.io/2016/11/16/CompileTimeString/</url>
       <content type="html"><![CDATA[<p>String comparison is a relatively slow operation and some times not tolerable. Especially when you have many if..else.. (or switch/case) code like this:<br>
-if (mode == “StateA”) {<br>
-…<br>
+if (mode == &quot;StateA&quot;) {<br>
+...<br>
 }<br>
-else if (mode == “StateB”) {<br>
-…<br>
+else if (mode == &quot;StateB&quot;) {<br>
+...<br>
 }</p>
 <p>The first thought come in mind is to use hash function to speed up the comparison operation; so we can improve the time complexity from O(<span class="math inline">\(n^2\)</span>) to O(1). How can we do better? Make the hash calculation on compile time so it saves some extra run-time cost for constant string hash calculation and let the compiler do the job for you.</p>
 <h3 id="c98-solutions">c++98 solutions</h3>
 <p>Before c++11, c++98 solutions are not perfect. Such as:</p>
 <ul>
-<li><a href="http://www.gamasutra.com/view/news/127915/InDepth_Quasi_CompileTime_String_Hashing.php" target="_blank" rel="external">quasi compile time string hashing</a><br>
-Cons: This solution does not work for “switch/case” statements.<br>
+<li><a href="http://www.gamasutra.com/view/news/127915/InDepth_Quasi_CompileTime_String_Hashing.php" target="_blank" rel="noopener">quasi compile time string hashing</a><br>
+Cons: This solution does not work for &quot;switch/case&quot; statements.<br>
 </li>
-<li><a href="http://arcticinteractive.com/2009/04/18/compile-time-string-hashing-boost-mpl/" target="_blank" rel="external">using Boost.MPL</a><br>
+<li><a href="http://arcticinteractive.com/2009/04/18/compile-time-string-hashing-boost-mpl/" target="_blank" rel="noopener">using Boost.MPL</a><br>
 Cons: This solution needs to separate strings into groups.</li>
 </ul>
 <h3 id="c11c14-solutions">c++11/c++14 solutions</h3>
 <p>In c++11/c++14, constexpr provides us a new way to the perfect solution for compile time string hashing. However different c++ compilers support the new standard differently and we still need to make sure the code is fully tested on multiple compilers.</p>
-<p>So first let’s first pick up an easy Hash function to start. The trick is to utilize the c++11</p>
+<p>So first let's first pick up an easy Hash function to start. The trick is to utilize the c++11</p>
 <ul>
 <li>template/macro (two ways for compile time processing)</li>
 <li>constexpr syntax</li>
 </ul>
 <p>to pre-calculate the hash value and sometimes with the help of template recursion in compile time.</p>
 <h4 id="example-a">Example A</h4>
-<p>Java string’s hashCode() is one of the simplest hash function which uses <a href="https://en.wikipedia.org/wiki/Horner&#39;s_method" target="_blank" rel="external">Horner’s method</a>: <span class="math display">\[h = s[0] * 31^\left(n-1\right)+s[1] * 31^\left(n-2\right) + ... + s[n-1]\]</span></p>
-<p>It’s not hard to deduce the following iterative equation:</p>
+<p>Java string's hashCode() is one of the simplest hash function which uses <a href="https://en.wikipedia.org/wiki/Horner&#39;s_method" target="_blank" rel="noopener">Horner's method</a>: <span class="math display">\[h = s[0] * 31^\left(n-1\right)+s[1] * 31^\left(n-2\right) + ... + s[n-1]\]</span></p>
+<p>It's not hard to deduce the following iterative equation:</p>
 <p><span class="math display">\[h = h * 31 + s[n-1]\]</span></p>
 <p>Based on this recusive nature you can write a simple recursive c++ function:</p>
 <pre><code>template &lt;size_t N&gt;
@@ -288,7 +288,7 @@ constexpr inline size_t HORNER_HASH(size_t prime, const char (&amp;str)[N], size
 }
 #define CompileTimeHash1(x) (HORNER_HASH(31, x))
 </code></pre>
-<p>If you are not familiar with syntax <code>const char (&amp;str)[N]</code> Stefan Reinalter gave an explanation <a href="https://blog.molecular-matters.com/2011/06/22/subtle-differences-in-c/" target="_blank" rel="external">here</a>.</p>
+<p>If you are not familiar with syntax <code>const char (&amp;str)[N]</code> Stefan Reinalter gave an explanation <a href="https://blog.molecular-matters.com/2011/06/22/subtle-differences-in-c/" target="_blank" rel="noopener">here</a>.</p>
 <p>Note <code>N</code> is deduced to be <code>sizeof(str)</code> which including the null terminator for c string so we have to pass <code>N-1</code> as the length of c string.</p>
 <p>The following testing code validates if the runtime hash function generates the same result as the compile time hash function both in <code>if</code> and <code>switch</code> statements.</p>
 <pre><code>#include &lt;stdio.h&gt;
